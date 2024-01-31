@@ -1,0 +1,76 @@
+<?php
+include("config/database.php");
+// Abre el archivo en modo lectura
+$archivo = fopen("finalist.txt", "r");
+
+// Verifica si el archivo se abrió correctamente
+if ($archivo) {
+    // Inicializa variables para almacenar información sobre la canción
+    $titulo = "";
+    $artista = "";
+    $album = "";
+    $revisado = false;
+    $rate = 0;
+
+    // Lee el archivo línea por línea
+    while (($linea = fgets($archivo)) !== false) {
+        // Divide la línea en partes usando ":" como delimitador
+        $partes = explode(":", $linea);
+
+        // Verifica el tipo de información y asigna valores correspondientes
+        if (count($partes) == 2) {
+            $clave = trim($partes[0]);
+            $valor = trim($partes[1]);
+
+            switch ($clave) {
+                case 'Título':
+                    $titulo = $valor;
+                    break;
+                case 'Artista':
+                    $artista = $valor;
+                    break;
+                case 'Álbum':
+                    $album = $valor;
+                    break;
+                case 'Revisado':
+                    $revisado = ($valor === 'true');
+                    break;
+                case 'Rate':
+                    $rate = intval($valor);
+                    break;
+            }
+        }
+
+        // Si encontramos una línea en blanco, almacenamos la información en la base de datos
+        if (trim($linea) === "") {
+            insertarCancion($conn, $titulo, $artista, $album, $revisado, $rate);
+            // Ejemplo de cómo imprimir la información (reemplaza esto con tu lógica de base de datos)
+            echo "Título: $titulo, Artista: $artista, Álbum: $album, Revisado: " . ($revisado ? 'true' : 'false') . ", Rate: $rate<br>";
+            // Resetea las variables para la próxima canción
+            $titulo = "";
+            $artista = "";
+            $album = "";
+            $revisado = false;
+            $rate = 0;
+        }
+    }
+    fclose($archivo);
+} else {
+    echo "No se pudo abrir el archivo.";
+}
+$conn->close();
+function insertarCancion($conn, $titulo, $artista, $album, $revisado, $rate) {
+    $titulo = $conn->real_escape_string($titulo);
+    $artista = $conn->real_escape_string($artista);
+    $album = ($album === 'null') ? 'NULL' : "'" . $conn->real_escape_string($album) . "'";
+    $revisado = $revisado ? 1 : 0;
+
+    $sql = "INSERT INTO cancion (nombre, artista, album, revisado, rate) VALUES ('$titulo', '$artista', $album, $revisado, $rate)";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Canción insertada con éxito<br>";
+    } else {
+        echo "Error al insertar canción: " . $conn->error . "<br>";
+    }
+}
+?>

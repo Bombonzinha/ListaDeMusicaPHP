@@ -1,0 +1,210 @@
+body{
+    background-color: rgb(0, 0, 0);
+    margin: 0; 
+    padding: 0; 
+}
+
+input#searchInput {
+    width: calc(100% - 1px);
+    padding: 8px;
+    border-right: 4px solid rgb(0, 200, 255);
+    border-left: 4px solid rgb(0, 200, 255);
+    border-bottom: 4px solid rgb(0, 200, 255);
+    box-sizing: border-box;
+    background-color: #343434;
+    color: white;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+input#searchInput:hover {
+    background-color: rgb(0, 100, 128);
+    border-color: rgba(0, 200, 255);  
+}
+input#searchInput:focus {
+    background-color: rgba(128, 83, 0);
+    border-color: orange;  
+}
+
+input#searchInput::placeholder {
+    text-align: center;  
+    line-height: inherit; /* Hereda la altura de línea del elemento padre para centrar verticalmente */
+    color: rgba(255, 255, 255, 0.7); 
+}
+
+table {
+    width: calc(100% - 1px);
+    border-collapse: collapse;
+    margin-top: 35px;
+}
+
+th, tr {
+    padding: 8px;
+    text-align: center;
+}
+
+td, th {
+    border-right: 2px solid rgb(0, 200, 255);
+    border-left: 2px solid rgb(0, 200, 255);
+}
+td {
+    color: white;
+    font-size: 20px;
+}
+
+th {
+    color: gold;
+    background-color: black;
+    border-bottom: 2px solid rgb(0, 200, 255);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 35px;
+    z-index: 2;
+}
+
+tr {
+    height: 30px;
+}
+
+tbody {
+    display: table-row-group;
+    height: 30px;
+    margin-bottom: 100px;
+}
+
+#bottom-buttons {
+    margin-top: 47px;
+}
+
+th:hover {
+    background-color: rgba(0, 100, 128);
+    cursor: pointer;
+}
+
+tr:nth-child(odd) {
+    background-color: #343434; 
+}
+
+tr:nth-child(even) {
+    background-color: #404040; 
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+    width: 100px; 
+}
+
+.rate, .revisado{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#guardarBtn, #agregarBtn{
+    width: 50%;
+    font-size: 40px;
+    position: fixed;
+    bottom: 0px;
+    padding: 0px;
+    background-color: black;
+    color: gold;
+    cursor: pointer;
+    border: none;
+    border-top: 2px solid rgb(0, 200, 255);
+    transition: background-color 300ms, color 300ms;
+}
+#guardarBtn {
+    right: 50%;
+    border-right: 1px solid rgb(0, 200, 255);
+}
+#agregarBtn{
+    left: 50%;
+    border-left: 1px solid rgb(0, 200, 255);
+}
+
+#guardarBtn:hover, #agregarBtn:hover {
+    background-color: rgb(0, 200, 255);
+    color: black;
+}
+
+input[type="checkbox"].revisadoCheckbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgb(0, 142, 182);  
+    background-color: rgb(255, 0, 0); 
+    border-radius: 5px;  
+    cursor: pointer;
+}
+
+input[type="checkbox"].revisadoCheckbox:checked {
+    background-color: rgb(0, 255, 0); 
+    border-color: rgb(0, 142, 182); 
+    color: white; 
+}
+
+/* input[type="checkbox"].revisadoCheckbox::after {
+    content: '✓'; 
+    font-size: 16px;
+    line-height: 1;
+    color: rgb(0, 0, 0); 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+}
+
+input[type="checkbox"].revisadoCheckbox:checked::after {
+    visibility: visible;
+} */
+
+.eliminar-btn {
+    margin: 0;
+    background-color: red; /* Cambia el color de fondo según tus preferencias */
+    color: white; /* Cambia el color del texto según tus preferencias */
+    font-weight: bold;
+    border: none;
+    padding: 5px; /* Ajusta el padding según tus preferencias */
+    cursor: pointer;
+}
+
+.eliminar-btn:hover {
+    background-color: darkred; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(52, 59, 141, 0.7);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
